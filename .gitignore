@@ -1,0 +1,28 @@
+# Secrets
+.env
+*.pem
+*.key
+*.crt
+*.pfx
+
+# Database files
+*.sql
+backup/
+
+# Docker
+data/
+volumes/
+tmp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp

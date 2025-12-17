@@ -1,0 +1,17 @@
+{
+    auto_https disable_redirects
+    default_sni 46.224.38.85
+}
+
+46.224.38.85 {
+    tls internal
+    
+    handle /n8n* {
+        uri strip_prefix /n8n
+        reverse_proxy n8n:5678
+    }
+    
+    handle {
+        reverse_proxy windmill_server:8000
+    }
+}
