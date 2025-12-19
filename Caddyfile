@@ -6,11 +6,23 @@
 46.224.38.85 {
     tls internal
     
+    # n8n with proper redirect handling
     handle /n8n* {
-        uri strip_prefix /n8n
-        reverse_proxy n8n:5678
+        # Fix for auth redirects - strip ONE /n8n prefix
+        @n8n_path path_regexp ^/n8n(/n8n.*|$)
+        handle @n8n_path {
+            uri strip_prefix /n8n
+            reverse_proxy n8n:5678
+        }
+        
+        # Normal n8n requests
+        handle {
+            uri strip_prefix /n8n
+            reverse_proxy n8n:5678
+        }
     }
     
+    # Everything else to Windmill
     handle {
         reverse_proxy windmill_server:8000
     }

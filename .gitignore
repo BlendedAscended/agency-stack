@@ -26,3 +26,4 @@ logs/
 .vscode/
 .idea/
 *.swp
+.env
